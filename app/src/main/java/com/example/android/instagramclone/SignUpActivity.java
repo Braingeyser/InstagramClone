@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 	private TextView txtRetrieveData;
 	private Button btnRetrieveAllData;
 	private String allKickboxers;
+	private Button btnTransition;
 
 
 	@Override
@@ -51,6 +52,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 			@Override
 			public void onClick(View v) {
 				ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("Kickboxer");
+
 				parseQuery.getInBackground("rNJeMyiigP", new GetCallback<ParseObject>() {
 					@Override
 					public void done(ParseObject parseObject, ParseException e) {
@@ -69,7 +71,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 				allKickboxers = "";
 				ParseQuery<ParseObject> queryAll = ParseQuery.getQuery("Kickboxer");
-				queryAll.findInBackground(new FindCallback<ParseObject>() {
+//                queryAll.whereGreaterThan("punchPower", 1000);
+                queryAll.whereGreaterThanOrEqualTo("punchPower", 2000);
+
+                queryAll.findInBackground(new FindCallback<ParseObject>() {
 					@Override
 					public void done(List<ParseObject> list, ParseException e) {
 						if(e == null){
@@ -87,6 +92,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 				});
 			}
 		});
+        btnTransition = findViewById(R.id.btnNextActivity);
+        btnTransition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 	}
 
 
