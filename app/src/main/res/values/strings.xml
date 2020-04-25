@@ -8,4 +8,7 @@
     <string name="instagram_logo_description">Instagram Logo</string>
     <string name="signup_activity_title">Sign Up</string>
     <string name="message_suffix_signup_successful"> successfully signed up</string>
+    <string name="message_suffix_login_successful"> successfully logged in</string>
+    <string name="message_prefix_sign_in_progress">\"Signing up \"</string>
+    <string name="message_incomplete_signup_fields"><![CDATA[Email, Username & Password are required]]></string>
 </resources>

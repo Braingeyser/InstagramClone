@@ -14,6 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/instagram_logo_description"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,13 +23,13 @@
         app:srcCompat="@drawable/instagram_icon" />
 
     <EditText
-        android:id="@+id/edtEmailSignup"
+        android:id="@+id/edtEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimaryLight"
         android:ems="10"
-        android:hint="Email"
+        android:autofillHints="@string/email_hint"
         android:inputType="textEmailAddress"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,18 +37,18 @@
         app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
     <EditText
-        android:id="@+id/edtPasswordSignup"
+        android:id="@+id/edtPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimaryLight"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailLogin" />
 
     <Button
         android:id="@+id/btnSignup"
@@ -57,11 +58,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorPrimary"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textColor="@color/colorTextIcons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPasswordSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/edtPasswordLogin" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -71,7 +72,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorPrimary"
-        android:text="Log In"
+        android:text="@string/log_in"
         android:textColor="@color/colorTextIcons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
