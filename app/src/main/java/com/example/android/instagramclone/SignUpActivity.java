@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -34,6 +37,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         edtEmailSignup = findViewById(R.id.edtEmailLogin);
         edtUsernameSignup = findViewById(R.id.edtUsernameSignup);
         edtPasswordSignup = findViewById(R.id.edtPasswordLogin);
+
+		//process signup if enter key is pressed, rather than signup button clicked
+		edtPasswordSignup.setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+				if(keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN){
+					onClick(btnSignup);
+				}
+				return false;
+			}
+		});
+
+
         btnSignup = findViewById(R.id.btnSignup);
         btnLogin = findViewById(R.id.btnLogin);
 
@@ -42,7 +58,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         //log out previous user on startup or we will get a session token exception
         if (ParseUser.getCurrentUser() != null) {
-            ParseUser.getCurrentUser().logOut();
+            //ParseUser.getCurrentUser().logOut();
+			transitionToSocialMediaActivity();
         }
     }
 
@@ -77,10 +94,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         public void done(ParseException e) {
                             if (e == null) {
                                 FancyToast.makeText(SignUpActivity.this,
-                                        appUser.getUsername() + R.string.message_suffix_signup_successful,
+                                        appUser.getUsername() + getString(R.string.message_suffix_signup_successful),
                                         Toast.LENGTH_SHORT,
                                         FancyToast.SUCCESS,
                                         true).show();
+                                transitionToSocialMediaActivity();
                             } else {
                                 FancyToast.makeText(SignUpActivity.this,
                                         e.getMessage(),
@@ -101,4 +119,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+
+    //Hide the keyboard if user taps background
+    public void rootLayoutTapped(View view){
+    	try{
+			InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+			inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+		}catch(Exception e){
+    		e.printStackTrace();
+		}
+
+	}
+
+	private void transitionToSocialMediaActivity(){
+    	Intent intent = new Intent(SignUpActivity.this, SocialMediaActivity.class);
+    	startActivity(intent);
+	}
 }
